@@ -1,0 +1,114 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+        request.auth.token.email == 'muhammadrashid172002@gmail.com'
+      );
+    }
+
+    function isStaff() {
+      return isSignedIn();
+    }
+
+    // Admins collection
+    match /admins/{adminId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      allow update: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    // Store settings
+    match /storeSettings/{settingId} {
+      allow read: if isStaff();
+      allow write: if isStaff();
+    }
+
+    // Categories
+    match /categories/{categoryId} {
+      allow read: if isStaff();
+      allow write: if isStaff();
+    }
+
+    // Products
+    match /products/{productId} {
+      allow read: if isStaff();
+      allow create, update: if isStaff();
+      allow delete: if isAdmin();
+    }
+
+    // Sales transactions
+    match /sales/{saleId} {
+      allow read: if isStaff();
+      allow create: if isStaff();
+      allow update: if isStaff();
+      allow delete: if isAdmin();
+    }
+
+    // Held sales (cart park)
+    match /heldSales/{heldId} {
+      allow read, write: if isStaff();
+    }
+
+    // Suppliers
+    match /suppliers/{supplierId} {
+      allow read, write: if isStaff();
+    }
+
+    // Purchases
+    match /purchases/{purchaseId} {
+      allow read, write: if isStaff();
+    }
+
+    // Customers
+    match /customers/{customerId} {
+      allow read, write: if isStaff();
+    }
+
+    // Inventory movements ledger
+    match /inventoryMovements/{movementId} {
+      allow read: if isStaff();
+      allow create: if isStaff();
+      allow update, delete: if isAdmin();
+    }
+
+    // Expenses
+    match /expenses/{expenseId} {
+      allow read, write: if isStaff();
+    }
+
+    // Returns
+    match /returns/{returnId} {
+      allow read, write: if isStaff();
+    }
+
+    // Audit logs (append-only)
+    match /auditLogs/{logId} {
+      allow read: if isStaff();
+      allow create: if isStaff();
+      allow update, delete: if false;
+    }
+  }
+}

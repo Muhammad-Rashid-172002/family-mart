@@ -1,0 +1,311 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Store staff and administration user profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "enum": ["owner", "manager", "cashier", "inventory_staff"] },
+        "phone": { "type": "string", "maxLength": 30 },
+        "status": { "type": "string", "enum": ["active", "inactive"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "email", "displayName", "role", "status"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Product category classification",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 100 },
+        "slug": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 300 },
+        "displayOrder": { "type": "number" },
+        "isActive": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "isActive"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Retail catalog merchandise product",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 150 },
+        "sku": { "type": "string", "maxLength": 50 },
+        "barcode": { "type": "string", "maxLength": 60 },
+        "categoryId": { "type": "string" },
+        "categoryName": { "type": "string" },
+        "brand": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 500 },
+        "unit": { "type": "string", "maxLength": 20 },
+        "isWeightBased": { "type": "boolean" },
+        "isQuickProduct": { "type": "boolean" },
+        "purchaseCost": { "type": "number" },
+        "sellingPrice": { "type": "number" },
+        "wholesalePrice": { "type": "number" },
+        "currentStock": { "type": "number" },
+        "minStockLevel": { "type": "number" },
+        "supplierId": { "type": "string" },
+        "supplierName": { "type": "string" },
+        "taxRate": { "type": "number" },
+        "isDiscountEligible": { "type": "boolean" },
+        "expiryDate": { "type": "string" },
+        "batchNumber": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "sku", "sellingPrice", "currentStock", "isActive"]
+    },
+    "Sale": {
+      "title": "Sale",
+      "description": "Committed customer sales transaction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "receiptNo": { "type": "string", "maxLength": 50 },
+        "cashierId": { "type": "string" },
+        "cashierName": { "type": "string", "maxLength": 100 },
+        "timestamp": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "itemDiscountsTotal": { "type": "number" },
+        "transactionDiscount": { "type": "number" },
+        "taxTotal": { "type": "number" },
+        "netTotal": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "paymentStatus": { "type": "string", "enum": ["completed", "refunded", "partially_refunded"] },
+        "amountReceived": { "type": "number" },
+        "changeDue": { "type": "number" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "receiptNo", "cashierId", "netTotal", "paymentMethod", "paymentStatus"]
+    },
+    "Supplier": {
+      "title": "Supplier",
+      "description": "Vendor and merchandise supplier",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 120 },
+        "contactPerson": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "email": { "type": "string" },
+        "address": { "type": "string", "maxLength": 300 },
+        "openingBalance": { "type": "number" },
+        "currentBalance": { "type": "number" },
+        "isActive": { "type": "boolean" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "isActive"]
+    },
+    "Purchase": {
+      "title": "Purchase",
+      "description": "Merchandise procurement order from supplier",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "purchaseOrderNo": { "type": "string", "maxLength": 50 },
+        "supplierId": { "type": "string" },
+        "supplierName": { "type": "string" },
+        "status": { "type": "string", "enum": ["draft", "pending", "received", "cancelled"] },
+        "totalAmount": { "type": "number" },
+        "amountPaid": { "type": "number" },
+        "paymentStatus": { "type": "string", "enum": ["unpaid", "partial", "paid"] },
+        "paymentMethod": { "type": "string" },
+        "receivedAt": { "type": "string" },
+        "receivedBy": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "purchaseOrderNo", "supplierId", "status", "totalAmount"]
+    },
+    "Customer": {
+      "title": "Customer",
+      "description": "Retail customer record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "email": { "type": "string" },
+        "address": { "type": "string" },
+        "totalPurchases": { "type": "number" },
+        "loyaltyPoints": { "type": "number" },
+        "creditBalance": { "type": "number" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name"]
+    },
+    "InventoryMovement": {
+      "title": "InventoryMovement",
+      "description": "Auditable stock movement ledger record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "productId": { "type": "string" },
+        "productName": { "type": "string" },
+        "sku": { "type": "string" },
+        "quantityChange": { "type": "number" },
+        "previousQuantity": { "type": "number" },
+        "newQuantity": { "type": "number" },
+        "movementType": { "type": "string", "enum": ["sale", "purchase", "adjustment", "return", "damage", "expiry"] },
+        "reason": { "type": "string" },
+        "referenceId": { "type": "string" },
+        "performedBy": { "type": "string" },
+        "performedByName": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "productId", "quantityChange", "previousQuantity", "newQuantity", "movementType"]
+    },
+    "Expense": {
+      "title": "Expense",
+      "description": "Store operational expense record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "category": { "type": "string" },
+        "amount": { "type": "number" },
+        "date": { "type": "string" },
+        "description": { "type": "string", "maxLength": 300 },
+        "paymentMethod": { "type": "string" },
+        "recordedBy": { "type": "string" },
+        "recordedByName": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "category", "amount", "date"]
+    },
+    "Return": {
+      "title": "Return",
+      "description": "Customer return and refund transaction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "returnNo": { "type": "string" },
+        "originalSaleId": { "type": "string" },
+        "originalReceiptNo": { "type": "string" },
+        "totalRefundAmount": { "type": "number" },
+        "refundPaymentMethod": { "type": "string" },
+        "reason": { "type": "string" },
+        "approvedBy": { "type": "string" },
+        "approvedByName": { "type": "string" },
+        "restocked": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "originalSaleId", "totalRefundAmount", "reason"]
+    },
+    "StoreSettings": {
+      "title": "StoreSettings",
+      "description": "Store profile, receipt and operational parameters",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "storeName": { "type": "string", "maxLength": 100 },
+        "tagline": { "type": "string", "maxLength": 200 },
+        "address": { "type": "string", "maxLength": 300 },
+        "phone": { "type": "string", "maxLength": 50 },
+        "email": { "type": "string" },
+        "taxNumber": { "type": "string" },
+        "taxRate": { "type": "number" },
+        "currency": { "type": "string" },
+        "currencySymbol": { "type": "string" },
+        "timezone": { "type": "string" },
+        "receiptFooter": { "type": "string" },
+        "receiptWidth": { "type": "string", "enum": ["80mm", "58mm"] },
+        "negativeStockAllowed": { "type": "boolean" },
+        "lowStockThreshold": { "type": "number" },
+        "expiryWarningDays": { "type": "number" },
+        "isInitialized": { "type": "boolean" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "storeName", "currency", "currencySymbol"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "System-wide security and operations audit log",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "action": { "type": "string" },
+        "entityType": { "type": "string" },
+        "entityId": { "type": "string" },
+        "details": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userRole": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "action", "timestamp", "userId"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles and assigned role definitions"
+    },
+    "/admins/{adminId}": {
+      "schema": "User",
+      "description": "Admin access allowlist lookup for RBAC"
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Store product categories"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Product catalog and current stock levels"
+    },
+    "/sales/{saleId}": {
+      "schema": "Sale",
+      "description": "Recorded customer sales"
+    },
+    "/suppliers/{supplierId}": {
+      "schema": "Supplier",
+      "description": "Merchandise suppliers"
+    },
+    "/purchases/{purchaseId}": {
+      "schema": "Purchase",
+      "description": "Supplier purchase orders and received stock"
+    },
+    "/customers/{customerId}": {
+      "schema": "Customer",
+      "description": "Customer profiles and purchase metrics"
+    },
+    "/inventoryMovements/{movementId}": {
+      "schema": "InventoryMovement",
+      "description": "Auditable stock movement ledger"
+    },
+    "/expenses/{expenseId}": {
+      "schema": "Expense",
+      "description": "Store operational expenses"
+    },
+    "/returns/{returnId}": {
+      "schema": "Return",
+      "description": "Returns and refunds records"
+    },
+    "/storeSettings/{settingId}": {
+      "schema": "StoreSettings",
+      "description": "Store general settings and receipt configuration"
+    },
+    "/auditLogs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Sensitive security and operation logs"
+    }
+  }
+}

@@ -1,0 +1,1261 @@
+Act as a Senior Full-Stack Software Engineer, Retail POS Architect, Firebase Expert, Database Designer, and Premium UI/UX Designer.
+
+Your task is to BUILD a complete, professional, production-oriented Retail POS (Point of Sale) and Inventory Management System for a grocery and convenience store named "Family Mart".
+
+IMPORTANT:
+Do not build a landing page, static dashboard, or UI-only prototype. Build a functional application with working navigation, database integration, authentication, product management, barcode scanning, billing, inventory management, purchases, sales reports, and role-based permissions.
+
+First inspect the existing project structure. If the project already contains working code, preserve its useful functionality and improve it rather than unnecessarily replacing everything.
+
+==================================================
+1. PROJECT OVERVIEW
+==================================================
+
+Application Name: Family Mart POS
+
+Business Type:
+Grocery Store, Supermarket, Convenience Store, Packaged Food Retailer, and General Merchandise Store.
+
+Primary Objectives:
+- Fast and accurate checkout.
+- Barcode-based billing.
+- Manual product search for products without barcodes.
+- Custom barcode generation and printing.
+- Real-time inventory tracking.
+- Purchase and supplier management.
+- Sales, expenses, and profit reporting.
+- Employee and cashier management.
+- Professional receipt generation.
+- Secure and reliable business operations.
+
+Target Users:
+1. Owner / Super Admin
+2. Store Manager
+3. Cashier
+4. Inventory Staff
+
+Currency: PKR (Pakistani Rupees)
+
+Timezone: Asia/Karachi
+
+The application must be configurable for Family Mart's actual products, prices, address, and business details.
+
+Do not invent actual store information.
+
+==================================================
+2. TECHNOLOGY STACK
+==================================================
+
+Use:
+
+- React
+- TypeScript
+- Vite, if appropriate for the existing project
+- Tailwind CSS
+- Firebase Authentication
+- Cloud Firestore
+- Firebase Storage where required
+- Secure server-side APIs using the supported Node.js runtime
+- Lucide React icons
+- React Hook Form
+- Zod validation
+- A reliable charting library
+- A maintained barcode generation library
+- Appropriate date and currency formatting utilities
+
+Use the Firebase integration available in Google AI Studio where supported.
+
+Important architecture requirements:
+
+- Keep frontend and backend responsibilities separate.
+- Store business records in Firestore.
+- Enforce sensitive operations on the server.
+- Use Firestore Security Rules.
+- Never expose private credentials.
+- Never trust financial totals supplied by the browser.
+- Never trust a user-submitted role field.
+- Use database transactions or suitable atomic operations for critical inventory and sales operations.
+- Add appropriate validation, error handling, and logging.
+
+Do not pretend that Firebase, authentication, payment gateways, or hardware integrations are working until they have actually been configured and tested.
+
+==================================================
+3. PREMIUM UI/UX DESIGN SYSTEM
+==================================================
+
+Create an exceptionally polished and modern retail management interface.
+
+Visual direction:
+
+- Premium enterprise SaaS.
+- Modern retail software.
+- Clean, elegant, and highly professional.
+- Emerald green as the primary brand color.
+- White and subtle neutral backgrounds.
+- Dark, readable typography.
+- Refined borders and shadows.
+- Consistent spacing.
+- Modern tables and data cards.
+- Subtle animations.
+- Excellent visual hierarchy.
+- High-quality icons.
+- Professional modal dialogs.
+- Responsive layouts.
+- Smooth but restrained transitions.
+
+Use Inter or a similar modern font.
+
+Avoid:
+
+- Generic AI-generated dashboard aesthetics.
+- Excessive gradients.
+- Excessive rounded cards.
+- Oversized headings.
+- Unnecessary animations.
+- Decorative elements that slow down billing.
+- Fake analytics.
+- Non-functional buttons.
+- Excessively complicated cashier screens.
+
+Use a consistent design system with reusable components, design tokens, and clear typography.
+
+Support:
+- Light theme.
+- Optional dark theme.
+- Responsive desktop layout.
+- Tablet layout.
+- Mobile layout.
+
+Create professional loading skeletons, empty states, error states, success notifications, and confirmation dialogs.
+
+The cashier interface must prioritize speed and readability over decoration.
+
+==================================================
+4. APPLICATION LAYOUT
+==================================================
+
+Create a persistent navigation sidebar containing:
+
+1. Dashboard
+2. POS / New Sale
+3. Sales History
+4. Products
+5. Categories
+6. Inventory
+7. Barcode Management
+8. Purchases
+9. Suppliers
+10. Customers
+11. Expenses
+12. Reports
+13. Staff & Permissions
+14. Settings
+15. Audit Logs
+
+Requirements:
+
+- Highlight the active page.
+- Support collapsible navigation.
+- Display the current user's name and role.
+- Include logout.
+- Show authorized navigation items only.
+- Provide a responsive mobile navigation menu.
+- Use reusable page headers and breadcrumbs.
+- Keep navigation consistent across the application.
+
+==================================================
+5. AUTHENTICATION AND ACCESS CONTROL
+==================================================
+
+Implement Firebase Authentication.
+
+Support a secure owner account setup process and authorized staff login.
+
+Roles:
+
+OWNER / SUPER ADMIN
+- Full business access.
+- Manage users and permissions.
+- View financial reports.
+- Manage all products and inventory.
+- Manage purchases and suppliers.
+- Configure business settings.
+- Approve sensitive actions.
+- View audit logs.
+
+MANAGER
+- Manage products.
+- Manage inventory.
+- Manage purchases.
+- View authorized reports.
+- Manage permitted refunds and discounts.
+- Cannot change owner-level security settings.
+
+CASHIER
+- Access POS.
+- Scan products.
+- Create sales.
+- Print receipts.
+- Hold and resume permitted transactions.
+- View permitted sales history.
+- Cannot access unrestricted profit reports.
+- Cannot modify purchase costs or unrestricted inventory records.
+
+INVENTORY STAFF
+- Receive stock.
+- Manage stock counts.
+- Perform authorized inventory adjustments.
+- Access permitted product management functions.
+- Cannot access unrestricted financial reports.
+
+Security requirements:
+
+- Enforce authorization on the backend.
+- Configure Firestore Security Rules.
+- Prevent unauthorized registration.
+- Do not grant administrator access based on frontend state.
+- Validate all sensitive operations.
+- Require appropriate permissions for refunds, voids, price changes, and stock adjustments.
+- Record sensitive actions in the audit log.
+
+==================================================
+6. DASHBOARD
+==================================================
+
+Build a real-time business dashboard using actual stored data.
+
+Display summary cards for:
+
+- Today's Gross Sales
+- Today's Net Sales
+- Total Transactions
+- Estimated Gross Profit
+- Low Stock Products
+- Out of Stock Products
+- Products Near Expiry
+- Today's Recorded Expenses
+
+Charts:
+
+- Sales Trend.
+- Sales by Category.
+- Top-Selling Products.
+- Payment Method Distribution.
+- Cashier Performance, where authorized.
+
+Additional sections:
+
+- Recent Sales.
+- Recent Purchases.
+- Low Stock Alerts.
+- Expiring Products.
+- Recent Inventory Movements.
+- Business Activity.
+
+Date filters:
+
+- Today.
+- Yesterday.
+- Last 7 Days.
+- This Month.
+- Previous Month.
+- Custom Date Range.
+
+All dashboard values must come from the database or properly calculated business records.
+
+Never display hard-coded sample figures as real business results.
+
+Handle loading, empty, and failed data states properly.
+
+==================================================
+7. POS / CASHIER CHECKOUT SCREEN
+==================================================
+
+This is the most important screen in the application.
+
+Build a fast, responsive, professional checkout interface.
+
+Desktop layout:
+
+LEFT SIDE:
+- Barcode input.
+- Product search.
+- Category filters.
+- Product grid.
+- Product name.
+- Selling price.
+- Stock availability.
+- Quick product buttons.
+
+RIGHT SIDE:
+- Current cart.
+- Selected items.
+- Quantity controls.
+- Unit price.
+- Line total.
+- Item removal.
+- Subtotal.
+- Discount.
+- Tax, if applicable.
+- Grand total.
+- Checkout button.
+
+Functional requirements:
+
+1. Support keyboard-wedge USB barcode scanners.
+2. Automatically process scanner input where appropriate.
+3. Allow manual product search by name, SKU, or barcode.
+4. Add matching products to the cart.
+5. Increment quantity when the same product is scanned again.
+6. Allow authorized quantity changes.
+7. Allow item removal.
+8. Calculate line totals correctly.
+9. Apply permitted item-level discounts.
+10. Apply permitted transaction-level discounts.
+11. Calculate totals accurately.
+12. Support cash payments.
+13. Support configured alternative payment methods.
+14. Calculate cash received and change due.
+15. Generate unique transaction numbers.
+16. Prevent duplicate sales.
+17. Prevent accidental double submission.
+18. Display stock warnings.
+19. Support configurable negative-stock policies.
+20. Hold and resume sales.
+21. Print receipts.
+22. Support authorized sale cancellation.
+23. Support controlled refunds.
+24. Display clear success and failure messages.
+
+Keyboard shortcuts should be configurable and documented.
+
+Examples:
+- Focus barcode input.
+- Open product search.
+- Open checkout.
+- Print receipt.
+- Clear or cancel the current cart after confirmation.
+
+The application must remain responsive during repeated barcode scanning.
+
+==================================================
+8. BARCODE AND QR CODE SYSTEM
+==================================================
+
+Implement a complete barcode identification workflow.
+
+IMPORTANT BUSINESS RULE:
+
+A QR code is NOT required on every product.
+
+Most packaged grocery products already have a manufacturer barcode.
+
+The system must support:
+
+A. EXISTING PRODUCT BARCODES
+
+When a cashier scans a barcode:
+
+1. Read the scanner input.
+2. Validate the scanned value.
+3. Search the registered barcode database.
+4. Identify the correct product.
+5. Retrieve the configured selling price.
+6. Add the product to the current cart.
+7. Update inventory only after a successful sale.
+
+Support common retail barcode formats, including EAN-13 and UPC-A, where applicable.
+
+Do not assume a barcode contains the product's price.
+
+The Family Mart database must determine the selling price.
+
+B. PRODUCTS WITHOUT BARCODES
+
+If a barcode is not found:
+
+- Show a clear "Product Not Found" message.
+- Keep the cashier on the POS screen.
+- Offer product search.
+- Allow searching by name or SKU.
+- Allow selecting a matching product.
+- Allow authorized staff to create a product from the product management module.
+- Do not automatically create duplicate products from unknown scans.
+
+C. INTERNAL BARCODE GENERATION
+
+Authorized users must be able to generate internal barcodes.
+
+Example:
+
+Product: Family Mart Loose Sugar
+
+SKU: FM-SUG-001
+
+Internal barcode: Generate a unique valid code appropriate for the selected barcode format.
+
+The example SKU is illustrative.
+
+Generate a unique code and check for collisions before saving it.
+
+Provide:
+
+- Barcode preview.
+- Printable labels.
+- Product name.
+- SKU.
+- Optional selling price.
+- Configurable label size.
+- Print quantity.
+- Batch label printing.
+
+Internal barcodes must not be represented as official manufacturer barcodes.
+
+D. QR CODE SUPPORT
+
+Support QR-based product identification only when a QR payload is explicitly registered and the scanner can read it.
+
+Do not treat arbitrary website URLs as product identifiers.
+
+Keep product identification separate from customer payment QR codes.
+
+If customer QR payments are implemented, create a separate payment workflow and only mark a payment as verified when appropriate confirmation is obtained.
+
+E. UNKNOWN BARCODE HANDLING
+
+When an unknown barcode is scanned, display:
+
+"Barcode not registered. Search for the product or ask an authorized user to register it."
+
+Provide clear actions:
+
+- Search Product.
+- Cancel.
+- Open Product Management, if authorized.
+
+==================================================
+9. QUICK PRODUCTS AND LOOSE ITEMS
+==================================================
+
+Create configurable quick-access buttons for commonly sold products.
+
+Examples:
+
+- Shopping Bag.
+- Eggs.
+- Loose Sugar.
+- Loose Rice.
+- Loose Daal.
+- Loose Flour.
+- Other Item.
+
+Allow authorized staff to configure the buttons.
+
+Support products sold by:
+
+- Piece.
+- Packet.
+- Bottle.
+- Box.
+- Carton.
+- Kilogram.
+- Gram.
+- Litre.
+- Millilitre.
+
+Allow decimal quantities where appropriate.
+
+Example:
+
+Rice:
+Quantity = 2 kg
+Price = PKR 350 per kg
+Total = PKR 700
+
+Sugar:
+Quantity = 1.5 kg
+Price = PKR 180 per kg
+Total = PKR 270
+
+Daal:
+Quantity = 0.5 kg
+Price = PKR 300 per kg
+Total = PKR 150
+
+Grand Total = PKR 1,120
+
+Implement accurate decimal calculations.
+
+Do not rely on floating-point arithmetic in a way that introduces financial rounding errors.
+
+Use an appropriate money representation and consistent rounding rules.
+
+Support manual weight entry.
+
+Keep the architecture extensible for compatible weighing-scale integration in the future.
+
+==================================================
+10. PRODUCT MANAGEMENT
+==================================================
+
+Build a complete product management module.
+
+Product fields:
+
+- Product ID.
+- Product Name.
+- SKU.
+- Primary Barcode.
+- Alternative Barcodes.
+- Category.
+- Brand.
+- Description.
+- Unit of Measure.
+- Purchase Cost.
+- Selling Price.
+- Optional Wholesale Price.
+- Stock Quantity.
+- Minimum Stock Level.
+- Supplier.
+- Tax Configuration.
+- Expiry Tracking.
+- Batch Tracking.
+- Product Status.
+- Created At.
+- Updated At.
+
+Features:
+
+- Create products.
+- Edit products.
+- View product details.
+- Search products.
+- Filter by category.
+- Filter by stock status.
+- Sort and paginate.
+- Import products from CSV.
+- Export products to CSV.
+- Validate imports.
+- Detect duplicates.
+- Generate internal barcodes.
+- Print labels.
+- Activate or deactivate products.
+
+Do not permanently delete products referenced by historical transactions.
+
+Historical sales must retain their original prices and product descriptions.
+
+==================================================
+11. DEFAULT PRODUCT CATEGORIES
+==================================================
+
+Create editable sample categories:
+
+- Grocery & Ration.
+- Rice, Flour & Pulses.
+- Cooking Oil & Ghee.
+- Spices & Condiments.
+- Dairy Products.
+- Beverages.
+- Snacks & Biscuits.
+- Chocolates & Sweets.
+- Bakery.
+- Frozen Foods.
+- Personal Care.
+- Household Cleaning.
+- Tissue & Paper Products.
+- Baby Care.
+- Canned & Packaged Foods.
+- Stationery.
+- General Merchandise.
+
+Allow administrators to:
+
+- Add categories.
+- Edit categories.
+- Change category names.
+- Assign products.
+- Reorder categories.
+- Deactivate categories.
+
+Mark sample products as demo data until the owner imports Family Mart's real inventory.
+
+==================================================
+12. INVENTORY MANAGEMENT
+==================================================
+
+Implement proper inventory tracking.
+
+Features:
+
+- Stock receiving.
+- Stock adjustments.
+- Stock counting.
+- Low-stock alerts.
+- Out-of-stock alerts.
+- Expiry tracking.
+- Batch tracking.
+- Damaged stock recording.
+- Expired stock recording.
+- Stock movement history.
+- Inventory valuation.
+- Optional multi-location readiness.
+
+Every inventory movement must record:
+
+- Product ID.
+- Movement type.
+- Quantity change.
+- Previous quantity.
+- New quantity.
+- Reason.
+- Related transaction, where applicable.
+- User ID.
+- Timestamp.
+
+Stock changes must be auditable.
+
+Use atomic operations or database transactions where appropriate.
+
+Prevent duplicate stock deductions.
+
+Prevent duplicate stock receiving.
+
+Do not allow unauthorized users to change stock balances directly.
+
+==================================================
+13. PURCHASES AND SUPPLIERS
+==================================================
+
+Implement supplier management.
+
+Supplier fields:
+
+- Name.
+- Contact Person.
+- Phone Number.
+- Address.
+- Email.
+- Notes.
+- Opening Balance, if enabled.
+- Status.
+
+Purchase workflow:
+
+1. Select a supplier.
+2. Add products.
+3. Enter quantities.
+4. Enter purchase costs.
+5. Apply applicable discounts and taxes.
+6. Save a draft purchase.
+7. Confirm goods received.
+8. Update stock after receipt confirmation.
+9. Record supplier payment.
+10. Track outstanding balances.
+11. Generate printable purchase records.
+
+Example:
+
+10 cartons of biscuits.
+
+24 packets per carton.
+
+Total received stock = 240 packets.
+
+If packet is the inventory base unit, convert the received cartons into packets accurately.
+
+Prevent a purchase from increasing stock more than once.
+
+Keep purchase cost separate from selling price.
+
+==================================================
+14. SALES HISTORY
+==================================================
+
+Create a professional sales history page.
+
+Display:
+
+- Receipt Number.
+- Transaction ID.
+- Date and Time.
+- Cashier.
+- Number of Items.
+- Subtotal.
+- Discount.
+- Tax.
+- Net Total.
+- Payment Method.
+- Payment Status.
+
+Features:
+
+- Search by receipt number.
+- Search by transaction ID.
+- Filter by date.
+- Filter by cashier.
+- Filter by payment method.
+- View transaction details.
+- Print duplicate receipt copies with appropriate labeling.
+- View refund history.
+- Apply authorized cancellation workflows.
+
+Do not permit silent deletion of completed sales.
+
+==================================================
+15. RECEIPT PRINTING
+==================================================
+
+Build professional thermal receipt templates.
+
+Support configurable 58 mm and 80 mm receipt layouts.
+
+Receipt content:
+
+- Family Mart name.
+- Configurable logo or text branding.
+- Address.
+- Phone Number.
+- Receipt Number.
+- Date and Time.
+- Cashier Name.
+- Product Names.
+- Quantities.
+- Unit Prices.
+- Line Totals.
+- Discounts.
+- Applicable Taxes.
+- Grand Total.
+- Payment Method.
+- Cash Received.
+- Change Returned.
+- Thank-You Message.
+
+Implement browser print support and a print preview.
+
+Handle printing errors gracefully.
+
+A printer failure must not create a duplicate sale.
+
+Clearly distinguish reprinted receipts from original receipts.
+
+Do not claim direct printer integration has been completed unless it has actually been tested.
+
+==================================================
+16. CUSTOMER MANAGEMENT
+==================================================
+
+Create an optional customer management module.
+
+Features:
+
+- Walk-in customer.
+- Customer Name.
+- Phone Number.
+- Purchase History.
+- Notes.
+- Optional Loyalty Points.
+- Optional Credit Sales.
+
+Do not require a customer profile for every transaction.
+
+If credit sales are enabled:
+
+- Record the credit transaction.
+- Track outstanding balance.
+- Record repayments.
+- Maintain transaction history.
+- Restrict access by role.
+- Audit balance adjustments.
+
+Do not introduce unnecessary personal data collection.
+
+==================================================
+17. EXPENSE MANAGEMENT
+==================================================
+
+Create an expense management module.
+
+Default categories:
+
+- Rent.
+- Electricity.
+- Staff Salaries.
+- Transport.
+- Packaging.
+- Repairs.
+- Utilities.
+- Miscellaneous.
+
+Each expense must contain:
+
+- Expense ID.
+- Category.
+- Amount.
+- Date.
+- Description.
+- Payment Method.
+- Recorded By.
+- Optional Receipt Attachment.
+- Created At.
+- Updated At.
+
+Allow authorized users to create and edit expenses.
+
+Record edits in the audit log.
+
+Include approved expenses in the appropriate financial reports.
+
+==================================================
+18. REPORTS AND FINANCIAL CALCULATIONS
+==================================================
+
+Implement accurate reports.
+
+Required reports:
+
+- Daily Sales.
+- Weekly Sales.
+- Monthly Sales.
+- Custom Date Range Sales.
+- Product-wise Sales.
+- Category-wise Sales.
+- Gross Profit.
+- Estimated Operating Profit.
+- Purchase Reports.
+- Supplier Payments.
+- Inventory Valuation.
+- Low Stock.
+- Expiring Products.
+- Stock Adjustments.
+- Cashier Performance.
+- Refunds.
+- Discounts.
+- Payment Methods.
+- Expenses.
+- Cash Reconciliation.
+
+Financial calculations must follow clearly documented definitions.
+
+Net Sales:
+Eligible sales revenue after discounts and returns, using a clearly defined tax treatment.
+
+Cost of Goods Sold:
+The recorded inventory cost associated with sold items, calculated using a documented cost method.
+
+Gross Profit:
+Net Sales excluding applicable sales tax, minus Cost of Goods Sold.
+
+Estimated Operating Profit:
+Gross Profit minus recorded operating expenses.
+
+Do not confuse total revenue with profit.
+
+Do not count unreceived purchase orders as received inventory.
+
+Do not count failed or cancelled sales as completed revenue.
+
+Handle refunds, discounts, returns, and missing product costs correctly.
+
+If cost data is missing, flag the report rather than silently reporting an incorrect profit.
+
+Provide date filters and CSV export.
+
+If Excel export is implemented, generate a valid Excel file.
+
+==================================================
+19. RETURNS AND REFUNDS
+==================================================
+
+Implement a controlled return workflow.
+
+1. Search for the original transaction.
+2. Select the returned items.
+3. Enter return quantities.
+4. Record the reason.
+5. Check permissions.
+6. Calculate the refund using original transaction information.
+7. Record the refund payment method.
+8. Determine whether the goods are resalable.
+9. Update inventory only when appropriate.
+10. Update financial reports.
+11. Create an audit record.
+
+Prevent duplicate refunds.
+
+Prevent returning more quantity than the original sale allows, after accounting for previous returns.
+
+Keep returned, damaged, and resalable inventory clearly distinguished.
+
+==================================================
+20. STAFF MANAGEMENT AND AUDIT LOGS
+==================================================
+
+Build a staff management module.
+
+Fields:
+
+- Name.
+- Email.
+- Role.
+- Status.
+- Created At.
+- Last Login, where available.
+
+Features:
+
+- Create authorized staff accounts.
+- Assign permitted roles.
+- Deactivate staff accounts.
+- Restrict access.
+- View permitted activity history.
+
+Create audit logs for:
+
+- Product Price Changes.
+- Purchase Cost Changes.
+- Refunds.
+- Sale Cancellations.
+- Discounts Above Configured Limits.
+- Stock Adjustments.
+- Purchase Receiving.
+- Expense Changes.
+- Permission Changes.
+- User Deactivation.
+- Business Settings Changes.
+
+Each log should record the actor, action, timestamp, and relevant record identifiers.
+
+Do not expose passwords, secrets, or unnecessary sensitive information in audit logs.
+
+==================================================
+21. FIRESTORE DATABASE ARCHITECTURE
+==================================================
+
+Create a clean and scalable data model.
+
+Suggested collections:
+
+- users
+- products
+- categories
+- suppliers
+- customers
+- sales
+- purchases
+- expenses
+- inventoryMovements
+- stockCounts
+- returns
+- payments
+- storeSettings
+- auditLogs
+
+Define document structures, validation, indexes, and references.
+
+Use server-side logic for critical financial and inventory operations.
+
+Use transactions or suitable atomic mechanisms for:
+
+- Completing a sale.
+- Deducting inventory.
+- Receiving stock.
+- Processing refunds.
+- Recording payments.
+
+Make critical operations idempotent where appropriate.
+
+Design the schema to support multiple registers and future multi-store expansion.
+
+Do not claim multi-store functionality is complete unless it is actually implemented.
+
+==================================================
+22. SECURITY RULES
+==================================================
+
+Implement secure Firestore Security Rules.
+
+Requirements:
+
+- Authenticated access where required.
+- Role-based access.
+- Least-privilege permissions.
+- Protected financial records.
+- Restricted user management.
+- Validated record ownership where applicable.
+- Prevention of unauthorized stock changes.
+- Prevention of unauthorized sale modification.
+- Protection of audit logs.
+- Secure storage access.
+
+Do not rely on frontend-only permissions.
+
+Do not expose privileged service credentials to the browser.
+
+Document any required server-side secrets through environment variables.
+
+==================================================
+23. STORE SETTINGS
+==================================================
+
+Create configurable settings for:
+
+- Store Name.
+- Logo.
+- Address.
+- Phone Number.
+- Currency.
+- Timezone.
+- Receipt Footer.
+- Tax Configuration.
+- Payment Methods.
+- Low Stock Thresholds.
+- Expiry Warning Period.
+- Barcode Format.
+- Barcode Label Size.
+- Receipt Width.
+- Discount Permissions.
+- Negative Stock Policy.
+
+Default currency: PKR.
+
+Default timezone: Asia/Karachi.
+
+Do not hard-code unknown store details.
+
+==================================================
+24. FIRST-RUN SETUP
+==================================================
+
+Create a first-run setup process.
+
+Steps:
+
+1. Configure store information.
+2. Establish the owner account securely.
+3. Configure currency and timezone.
+4. Set up product categories.
+5. Import actual products or load clearly labeled demo products.
+6. Configure receipt printing.
+7. Configure payment methods.
+8. Review security and permissions.
+
+Never allow public users to claim the owner role.
+
+Provide a safe way to distinguish demo records from live business data.
+
+==================================================
+25. NETWORK FAILURE AND OFFLINE READINESS
+==================================================
+
+The first version must work reliably as an online application.
+
+Implement:
+
+- Loading states.
+- Network error messages.
+- Safe retry behavior.
+- Protection against duplicate submissions.
+- Clear transaction status.
+- Recovery from interrupted requests where possible.
+
+Do not claim full offline POS support unless it has actually been implemented.
+
+Keep the architecture extensible for future offline billing and transaction synchronization.
+
+==================================================
+26. RESPONSIVE DESIGN
+==================================================
+
+The application must work properly on:
+
+- Desktop.
+- Laptop.
+- Tablet.
+- Mobile.
+
+Desktop:
+Full sidebar, efficient tables, spacious dashboard, and optimized checkout layout.
+
+Tablet:
+Responsive navigation, touch-friendly controls, and a usable checkout screen.
+
+Mobile:
+Collapsible navigation, readable cards, responsive forms, and horizontally manageable tables.
+
+Ensure:
+
+- No overlapping components.
+- No clipped text.
+- No horizontal overflow caused by layout bugs.
+- Proper touch targets.
+- Consistent spacing.
+- Accessible contrast.
+- Clear focus states.
+
+Test all major screens at different viewport sizes.
+
+==================================================
+27. PERFORMANCE
+==================================================
+
+Optimize the application for daily retail use.
+
+Requirements:
+
+- Efficient database queries.
+- Appropriate pagination.
+- Avoid unnecessary full-collection reads.
+- Use suitable indexes.
+- Avoid unnecessary component re-renders.
+- Optimize product search.
+- Keep barcode processing responsive.
+- Use server-side aggregation or suitable reporting strategies when needed.
+- Avoid loading the entire inventory into memory for every operation.
+
+Do not sacrifice financial accuracy for performance.
+
+==================================================
+28. AUTOMATED TESTING
+==================================================
+
+Write and run automated tests.
+
+Test the following:
+
+- Authentication.
+- Role-based permissions.
+- Product creation.
+- Product updates.
+- Barcode lookup.
+- Unknown barcode handling.
+- Internal barcode uniqueness.
+- Manual product search.
+- Quick product selection.
+- Weight-based calculations.
+- Cart totals.
+- Discounts.
+- Cash and change calculations.
+- Successful sales.
+- Duplicate sale prevention.
+- Stock deduction.
+- Purchase receiving.
+- Duplicate stock receiving prevention.
+- Refund processing.
+- Stock adjustments.
+- Profit calculations.
+- Receipt formatting.
+- Audit logging.
+- Responsive layouts.
+
+Fix errors discovered during testing.
+
+Do not claim tests passed unless they actually ran and passed.
+
+==================================================
+29. IMPLEMENTATION STRATEGY
+==================================================
+
+Build the actual application in a stable, incremental order.
+
+PHASE 1:
+- Project architecture.
+- Design system.
+- Authentication.
+- Navigation.
+- Firestore integration.
+- Role-based permissions.
+
+PHASE 2:
+- Product management.
+- Categories.
+- Barcode lookup.
+- Manual product search.
+- Internal barcode generation.
+
+PHASE 3:
+- POS checkout.
+- Cart calculations.
+- Payments.
+- Receipt printing.
+- Sales history.
+- Inventory deduction.
+
+PHASE 4:
+- Purchases.
+- Suppliers.
+- Stock receiving.
+- Stock adjustments.
+- Expiry tracking.
+
+PHASE 5:
+- Expenses.
+- Reports.
+- Refunds.
+- Staff management.
+- Audit logs.
+
+PHASE 6:
+- Responsive testing.
+- Automated testing.
+- Security review.
+- Performance optimization.
+- Deployment preparation.
+
+After each phase:
+
+- Run available tests.
+- Fix TypeScript errors.
+- Fix runtime errors.
+- Preserve completed functionality.
+- Verify that existing workflows continue to work.
+
+Do not replace working features with placeholders.
+
+If a feature requires external configuration, implement the supported parts and clearly explain the remaining setup.
+
+==================================================
+30. FINAL DELIVERY REQUIREMENTS
+==================================================
+
+Deliver a working application with:
+
+1. Premium UI/UX.
+2. Authentication.
+3. Role-based access.
+4. Admin dashboard.
+5. POS checkout.
+6. Barcode scanning.
+7. Manual product search.
+8. Internal barcode generation.
+9. Product and category management.
+10. Inventory management.
+11. Supplier management.
+12. Purchase receiving.
+13. Sales history.
+14. Receipt printing.
+15. Expense management.
+16. Financial reports.
+17. Refund workflows.
+18. Audit logs.
+19. Firestore integration.
+20. Security Rules.
+21. Responsive layouts.
+22. Automated tests.
+23. Deployment instructions.
+24. Environment variable documentation.
+25. A list of completed features and remaining configuration requirements.
+
+FINAL INSTRUCTION:
+
+Start by inspecting the project and implementing the foundation.
+
+Then build the working POS and inventory workflows.
+
+Prioritize correctness, security, usability, and maintainability over unnecessary visual effects.
+
+The final application must be suitable for hands-on testing with Family Mart's real products, barcode scanner, receipt printer, and business data after the required configuration is completed.
+
+Do not stop after generating the dashboard.
+
+Build the application, verify the implementation, run the available tests, and clearly report what is working and what still requires configuration.

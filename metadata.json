@@ -1,0 +1,8 @@
+{
+  "name": "Family Mart POS",
+  "description": "Production-grade Retail Point of Sale and Inventory Management System for Family Mart grocery and convenience stores.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
